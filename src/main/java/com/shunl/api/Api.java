@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Set;
 
 
 public class Api {
@@ -43,7 +44,11 @@ public class Api {
     	Double result = req_result.get(currency).getAsDouble();
     	return result;
     }
-    
+	
+	public Set<String> getCountry() throws Exception {
+		Getcountry country = new Getcountry();
+		return country.countryList;
+	}
     
     
 

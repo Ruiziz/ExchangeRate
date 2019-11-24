@@ -2,6 +2,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - apidemo",
+            "request": "launch",
+            "mainClass": "com.shunl.api.apidemo",
+            "projectName": "GUIdemo"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - apidemo",
+            "request": "launch",
+            "mainClass": "com.shunl.GUIdemo/com.shunl.api.apidemo",
+            "projectName": "GUIdemo"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - App",
             "request": "launch",
             "mainClass": "com.shunl.GUIdemo/com.shunl.GUIdemo.App",
