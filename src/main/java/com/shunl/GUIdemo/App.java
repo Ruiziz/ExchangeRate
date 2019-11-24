@@ -1,6 +1,9 @@
 package com.shunl.GUIdemo;
 import java.util.ArrayList;
 
+import com.google.gson.JsonObject;
+import com.shunl.api.Api;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent; 
@@ -34,12 +37,12 @@ import javafx.fxml.FXMLLoader;
  */
 public class App extends Application {
 
+	
 
-
-	private Double value;
+	private static Double rate;
 	static Stage primaryStage;
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage){
     	// set the title of scene
     	primaryStage.setTitle("Calculator!");
     	
@@ -140,11 +143,12 @@ public class App extends Application {
                 });
         	}else {
         	bt.setOnAction(value ->  {
-            	Double num = Double.parseDouble(btvalue);
-            	num = num*3.14;
-            	String btvalue2 = num.toString();
-                rawCurrency.appendText(btvalue);
-                targetCurrency.appendText(btvalue2);
+        		rawCurrency.appendText(btvalue);
+            	Double num = Double.parseDouble(rawCurrency.getText());
+            	num = num*rate;
+            	String btvalue2 = num.toString();               
+                //System.out.println(btvalue);
+                targetCurrency.setText(btvalue2);
             });
         	}
         }
@@ -182,8 +186,17 @@ public class App extends Application {
 	        });*/
        
       }
+    
+    static void Rate(String CountryCode) throws Exception {
+    	//Initial exchange rate
+    	//Now is static rate
+    	Api api = new Api("USD");
+		JsonObject jsonobj = api.getCurrencyInfo();
+		rate = api.getRate(jsonobj, "CNY");
+    }
 
-    public static void main(String[] args) {  
+    public static void main(String[] args) throws Exception { 
+    	Rate("USD");
     	launch(); 
     }
 
