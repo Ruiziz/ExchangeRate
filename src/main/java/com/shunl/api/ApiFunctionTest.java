@@ -10,6 +10,7 @@ public class ApiFunctionTest {
         String date = api.getUpdateDate();
         System.out.println(date);
         
+        
     }
         
     

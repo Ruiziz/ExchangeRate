@@ -31,7 +31,7 @@ public class Api {
     	
     	this.real_url = new URL(url);
     }
-    /**
+    /** 
 	 * Get the currency info
 	 * @return a JsonObject includes date, rate, etc.
 	 * @throws IOException
