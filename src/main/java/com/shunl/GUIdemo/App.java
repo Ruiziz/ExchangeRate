@@ -40,6 +40,7 @@ public class App extends Application {
 	
 
 	private static Double rate;
+	
 	static Stage primaryStage;
     @Override
     public void start(Stage primaryStage){
@@ -77,12 +78,19 @@ public class App extends Application {
         
         // use the input to calculate formula to get the output
         button.setOnAction(value ->  {
-        	String txt = rawCurrency.getText();
-        	Double num = Double.parseDouble(txt);
-        	num = num*3.14;
-        	txt = num.toString();
-            targetCurrency.setText(txt);
+        	String rawstr = rawCurrency.getText();
+        	Double out;
+        	try {
+        		out=Double.parseDouble(rawstr);
+        	}catch (Exception e) {
+        		out = 0.0;
+        	}
+            	Double outvalue = out*rate;
+            	targetCurrency.setText(outvalue.toString());
         });
+       
+        
+        
     
         
         // combine the two menus and two text fields
@@ -91,7 +99,7 @@ public class App extends Application {
         vbox.setPadding(new Insets(20));
         vbox.getChildren().addAll(rawCurrency, menuButton1, label1, targetCurrency, menuButton2, label2, button);;
    
-        
+
         // set the number pad  
         String[] keys =
         {
