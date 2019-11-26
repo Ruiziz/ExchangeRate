@@ -77,6 +77,7 @@ public class App extends Application {
     	Label label2 = new Label("Currency Type");
         
         // use the input to calculate formula to get the output
+    	/*
         button.setOnAction(value ->  {
         	String rawstr = rawCurrency.getText();
         	Double out;
@@ -88,7 +89,30 @@ public class App extends Application {
             	Double outvalue = out*rate;
             	targetCurrency.setText(outvalue.toString());
         });
+        */
        
+        //TODO Textfield action
+    	rawCurrency.setPromptText("Here is original currency!");
+        rawCurrency.setOnKeyTyped(value -> {
+        	String rawstr = rawCurrency.getText();
+        	Double out=0.0;
+        	if(rawstr.isBlank())rawstr="0";
+        	try {
+        		out=Double.parseDouble(rawstr);
+        	}catch (NumberFormatException e) {
+        		
+        		rawCurrency.selectBackward();
+        		rawCurrency.replaceSelection("");
+        		
+        	}  
+        		if(rawstr.contains("f") || rawstr.contains("d")) rawCurrency.deletePreviousChar();
+        		if(rawstr.isBlank()) {
+        			out=0.0;
+        		}      		
+            	Double outvalue = out*rate;
+            	targetCurrency.setText(outvalue.toString());
+        	
+        });
         
         
     
