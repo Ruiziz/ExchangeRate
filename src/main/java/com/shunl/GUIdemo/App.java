@@ -42,7 +42,7 @@ public class App extends Application {
 
 	
 
-	private static Double rate;
+	private static Double rate=1.0;
 	
 	private String rawName, targetName;
 	
@@ -54,7 +54,7 @@ public class App extends Application {
     	
     	// assign the whole structure
     	BorderPane bp = new BorderPane();
-        Scene scene = new Scene(bp, 300, 500);
+        Scene scene = new Scene(bp, 300, 450);
    
          
     	// assign all items
@@ -106,29 +106,31 @@ public class App extends Application {
 		
     	// set a TextField where input the number of raw currency user wants to convert
     	TextField  rawCurrency = new TextField();
+    	rawCurrency.setMaxWidth(250);
     	// label for rawCurrency
     	Label label1 = new Label("Currency Type");
     	// set the click button
-        Button button = new Button("Convert");
+        Button button = new Button("Upadate Rates");
         // set a TextField where output the number of target currency user wants to get
         TextField targetCurrency = new TextField();
+        targetCurrency.setMinWidth(250);
         // label for targetCurrency
     	Label label2 = new Label("Currency Type");
         
         // use the input to calculate formula to get the output
-    	/*
+    	
         button.setOnAction(value ->  {
-        	String rawstr = rawCurrency.getText();
-        	Double out;
         	try {
-        		out=Double.parseDouble(rawstr);
-        	}catch (Exception e) {
-        		out = 0.0;
-        	}
-            	Double outvalue = out*rate;
-            	targetCurrency.setText(outvalue.toString());
+				// get the rate (for raw currency)
+				Api apiupdate = new Api(rawName);
+				rate = apiupdate.getRate(apiupdate.getCurrencyInfo(), targetName);
+				targetCurrency.setPromptText("Rate updated! Date: " + apiupdate.getUpdateDate());
+			} catch (Exception e) {
+				
+				targetCurrency.setPromptText("You did not choose a currency!");
+			}
         });
-        */
+        
        
         //TODO Textfield action
     	rawCurrency.setPromptText("Here is original currency!");
@@ -137,20 +139,19 @@ public class App extends Application {
         	String rawstr = rawCurrency.getText();
         	Double out=0.0;
         	if(rawstr.isBlank())rawstr="0";
-        	try {
-        		out=Double.parseDouble(rawstr);
-        	}catch (NumberFormatException e) {
+        	if(rawstr.matches("[a-z]")) {
+        		rawCurrency.deletePreviousChar();
+        	}else {
+        	out=Double.parseDouble(rawstr);
+        	}
         		
-        		rawCurrency.selectBackward();
-        		rawCurrency.replaceSelection("");
-        		
-        	}  
-        		if(rawstr.contains("f") || rawstr.contains("d")) rawCurrency.deletePreviousChar();
-        		if(rawstr.isBlank()) {
-        			out=0.0;
-        		}      		
-            	Double outvalue = out*rate;
-            	targetCurrency.setText(outvalue.toString());
+        	
+        	//if(rawstr.contains("f") || rawstr.contains("d")) rawCurrency.deletePreviousChar();
+        	//if(rawstr.isBlank()) {
+        	//	out=0.0;
+        	//}      		
+            Double outvalue = out*rate;
+            targetCurrency.setText(outvalue.toString());
         	
         });
         
@@ -179,6 +180,7 @@ public class App extends Application {
         for (int i = 0; i < 12; i++)
         {
             Button padButton = new Button(keys[i]);
+            padButton.setMinSize(50, 50);
             // add the button to the button list
             numberButtons.add(i, padButton);
             
