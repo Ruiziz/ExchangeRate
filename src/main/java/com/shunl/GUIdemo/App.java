@@ -1,5 +1,8 @@
 package com.shunl.GUIdemo;
+
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 import com.google.gson.JsonObject;
 import com.shunl.api.Api;
@@ -41,9 +44,11 @@ public class App extends Application {
 
 	private static Double rate;
 	
+	private String rawName, targetName;
+	
 	static Stage primaryStage;
     @Override
-    public void start(Stage primaryStage){
+    public void start(Stage primaryStage) throws Exception {
     	// set the title of scene
     	primaryStage.setTitle("Calculator!");
     	
@@ -53,18 +58,52 @@ public class App extends Application {
    
          
     	// assign all items
-    	// set the Menu of raw currency
-    	MenuItem menuItem11 = new MenuItem("Option 1");
-        MenuItem menuItem21 = new MenuItem("Option 2");
-        MenuItem menuItem31 = new MenuItem("Option 3");
-        MenuButton menuButton1 = new MenuButton("Raw Currency", null, menuItem11, menuItem21, menuItem31);
-
-        // set the Menu of target currency
-    	MenuItem menuItem12 = new MenuItem("Option 1");
-        MenuItem menuItem22 = new MenuItem("Option 2");
-        MenuItem menuItem32 = new MenuItem("Option 3");
-        MenuButton menuButton2 = new MenuButton("Target Currency", null, menuItem12, menuItem22, menuItem32);
-
+		// set the Menu of raw currency
+		Api apiInitial = new Api("USD");
+		Set<String> countryName = apiInitial.getCountry();
+		List<String> countryList = new ArrayList<String>();
+		countryList.addAll(countryName);
+		
+		
+		MenuButton menuRaw = new MenuButton("Raw Currency");
+		for(int i = 0; i < countryList.size(); i++) {
+			MenuItem menuItem = new MenuItem(countryList.get(i));
+			menuRaw.getItems().add(menuItem);
+			menuItem.setOnAction(value -> {
+				
+				// get the name of raw currency
+				rawName = menuItem.getText();
+				menuRaw.setText(rawName);
+				
+			});
+			
+		}
+		// set the new menu button
+		MenuButton menuTarget = new MenuButton("Target Currency");
+		// loop
+		for (int j =0; j < countryList.size(); j++) {
+			MenuItem menuTargetItem = new MenuItem(countryList.get(j));
+			menuTarget.getItems().add(menuTargetItem);
+			menuTargetItem.setOnAction(valueTarget -> {
+				
+				// get the name of target currency
+				targetName = menuTargetItem.getText();
+				// set a new object
+				Api apiRaw;
+				try {
+					// get the rate (for raw currency)
+					apiRaw = new Api(rawName);
+					rate = apiRaw.getRate(apiRaw.getCurrencyInfo(), targetName);
+				} catch (Exception e) {
+					
+					e.printStackTrace();
+				}
+				menuTarget.setText(targetName);
+								
+			});
+		}
+		
+		
     	// set a TextField where input the number of raw currency user wants to convert
     	TextField  rawCurrency = new TextField();
     	// label for rawCurrency
@@ -93,6 +132,7 @@ public class App extends Application {
        
         //TODO Textfield action
     	rawCurrency.setPromptText("Here is original currency!");
+    	targetCurrency.setPromptText("Here is target currency!");
         rawCurrency.setOnKeyTyped(value -> {
         	String rawstr = rawCurrency.getText();
         	Double out=0.0;
@@ -121,7 +161,8 @@ public class App extends Application {
         // set 5 pixels between every child nodes
         VBox vbox = new VBox(10);
         vbox.setPadding(new Insets(20));
-        vbox.getChildren().addAll(rawCurrency, menuButton1, label1, targetCurrency, menuButton2, label2, button);;
+        vbox.getChildren().addAll(rawCurrency, menuRaw, label1, targetCurrency, menuTarget, label2, button);
+		;
    
 
         // set the number pad  
@@ -219,16 +260,10 @@ public class App extends Application {
        
       }
     
-    static void Rate(String CountryCode) throws Exception {
-    	//Initial exchange rate
-    	//Now is static rate
-    	Api api = new Api("USD");
-		JsonObject jsonobj = api.getCurrencyInfo();
-		rate = api.getRate(jsonobj, "CNY");
-    }
+
 
     public static void main(String[] args) throws Exception { 
-    	Rate("USD");
+    	
     	launch(); 
     }
 
