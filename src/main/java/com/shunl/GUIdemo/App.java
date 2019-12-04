@@ -35,7 +35,9 @@ public class App extends Application {
 	
 	private String rawName, targetName;
 	
+	
 	static Stage primaryStage;
+
     @Override
     public void start(Stage primaryStage) throws Exception {
     	// set the title of scene
@@ -178,7 +180,7 @@ public class App extends Application {
         }
        
         // set on the action for buttons to get the virtual keyboard input
-        //TODO
+        
     /*    for (int j = 0; j <10; j++) {
        
         	 // get the string of this button
@@ -196,7 +198,7 @@ public class App extends Application {
          	 txt = num.toString();
              targetCurrency.setText(txt);       	 
         }*/
-        //TODO Shun
+        
         for(Button bt:numberButtons) {
         	String btvalue = bt.getText();
         	if(btvalue=="C") {
@@ -227,7 +229,10 @@ public class App extends Application {
         
     }
         
-    
+    /**
+	 * Set a different style to Clear Button
+	 * @param button
+	 */
     private void makeClearButton(Button button) {
         button.setStyle("-fx-base: mistyrose;");
         /*button.setOnAction(new EventHandler<ActionEvent>() {
@@ -242,6 +247,12 @@ public class App extends Application {
     
 
 
+	/**
+	 * Main method to launch the App.
+	 * @param args
+	 * @throws Exception
+	 * @author shunl,ruizz
+	 */
     public static void main(String[] args) throws Exception { 
     	
     	launch(); 

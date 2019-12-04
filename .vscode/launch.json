@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - App",
+            "request": "launch",
+            "mainClass": "com.shunl.GUIdemo.App",
+            "projectName": "ApiTest"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - ApiFunctionTest",
             "request": "launch",
             "mainClass": "com.shunl.api.ApiFunctionTest",
