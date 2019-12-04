@@ -37,7 +37,7 @@ Type or click the button to input the value for the first currency
 
 
 
-##API
+## API
 
 The API we used is https://www.exchangerate-api.com/.
 
