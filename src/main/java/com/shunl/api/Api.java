@@ -10,7 +10,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Set;
 
-
+/**
+ * This is the API part.
+ */
 public class Api {
 	URL real_url;
 	
@@ -37,8 +39,10 @@ public class Api {
 	 * @throws IOException
 	 */
     public JsonObject getCurrencyInfo() throws IOException {
+    	//connect to the url
     	HttpURLConnection request = (HttpURLConnection) real_url.openConnection();
     	request.connect();
+    	//parse to Json.
     	JsonParser jp = new JsonParser();
     	JsonObject jsonobj = new JsonObject();
     	JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent()));
@@ -50,7 +54,7 @@ public class Api {
 	 * Get exchange rates for 52 countries.
 	 * @param jsonobj 
 	 * @param currency The currency you want to exchange to.
-	 * @return
+	 * @return exchange rate.
 	 */
     public Double getRate(JsonObject jsonobj,String currency) {
     	JsonObject req_result = jsonobj.get("rates").getAsJsonObject();
@@ -64,8 +68,9 @@ public class Api {
 	 */
 	public Set<String> getCountry() throws Exception {
 		JsonObject jsonobj = getCurrencyInfo();
-        //JsonElement countries = jsonobj.get("rates");
+        //Get the rates and know the countries this api have.
         JsonObject countries2 = jsonobj.getAsJsonObject("rates");
+        //obtain the Keyset to get a Set of country code.
         Set<String> countryList = countries2.keySet();
 		return countryList;
 	}

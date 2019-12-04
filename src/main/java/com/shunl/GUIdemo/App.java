@@ -1,4 +1,7 @@
 package com.shunl.GUIdemo;
+/**
+ * This is the GUI part.
+ * */
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +29,11 @@ import javafx.scene.layout.VBox;
 
 /**
  * JavaFX App
+ * ExchangeRate Calculator!
+ * We have 52 countries' currency.
+ * Can exchange with each other.
+ * Use ISO 4217 Three Letter Currency Codes to represent currency.
+ * @author shunl &amp ruizz.
  */
 public class App extends Application {
 
@@ -37,7 +45,9 @@ public class App extends Application {
 	
 	
 	static Stage primaryStage;
-
+/**
+ * This construct the users interface.
+ */
     @Override
     public void start(Stage primaryStage) throws Exception {
     	// set the title of scene
@@ -123,7 +133,7 @@ public class App extends Application {
         });
         
        
-        //TODO Textfield action
+        
     	rawCurrency.setPromptText("Here is original currency!");
     	targetCurrency.setPromptText("Here is target currency!");
         rawCurrency.setOnKeyTyped(value -> {
@@ -249,7 +259,6 @@ public class App extends Application {
 
 	/**
 	 * Main method to launch the App.
-	 * @param args
 	 * @throws Exception
 	 * @author shunl,ruizz
 	 */
