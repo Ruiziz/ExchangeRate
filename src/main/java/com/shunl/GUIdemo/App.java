@@ -4,31 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import com.google.gson.JsonObject;
 import com.shunl.api.Api;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.input.MouseEvent; 
+
 import javafx.application.Application;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.geometry.Insets;
-import javafx.scene.Group;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
+
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
-import javafx.scene.layout.StackPane;
+
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
+
 import javafx.scene.layout.VBox;
 
 /**
@@ -233,17 +226,6 @@ public class App extends Application {
         primaryStage.show();
         
     }
-    /*
-    private void makeNumericButton(final String s, Button button) {
-        button.setOnAction(new EventHandler<ActionEvent>() {
-	        @Override
-	        public void handle(ActionEvent actionEvent) {	       
-	                  value = value * 10 + Double.parseDouble(s);
-	                  value = Double.parseDouble(s);
-	                  System.out.print(value);
-	              }
-	            });}*/
-    	
         
     
     private void makeClearButton(Button button) {
