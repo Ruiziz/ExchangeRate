@@ -1,6 +1,6 @@
 # ExchangeRate
 
-> This is a Final project of CIT590 written by shunl & ruizz
+> This is a Final project of CIT590 written by shunl & ruizi
 
 ## What is it?
 

@@ -33,7 +33,7 @@ import javafx.scene.layout.VBox;
  * We have 52 countries' currency.
  * Can exchange with each other.
  * Use ISO 4217 Three Letter Currency Codes to represent currency.
- * @author shunl &amp ruizz.
+ * @author shunl &amp ruizi.
  */
 public class App extends Application {
 
@@ -260,7 +260,6 @@ public class App extends Application {
 	/**
 	 * Main method to launch the App.
 	 * @throws Exception
-	 * @author shunl,ruizz
 	 */
     public static void main(String[] args) throws Exception { 
     	
