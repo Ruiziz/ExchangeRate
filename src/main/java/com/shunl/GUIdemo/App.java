@@ -38,9 +38,14 @@ import javafx.scene.layout.VBox;
 public class App extends Application {
 
 	
-
+	/**
+	 * Initial exchange rate
+	 */
 	private static Double rate=1.0;
 	
+	/**
+	 * currency name.
+	 */
 	private String rawName, targetName;
 	
 	

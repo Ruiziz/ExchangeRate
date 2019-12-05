@@ -14,12 +14,19 @@ import java.util.Set;
  * This is the API part.
  */
 public class Api {
+	/**
+	 * URL to make connection.
+	 */
 	URL real_url;
 	
-	
+	/**
+	 * URL as String
+	 */
 	String url;
 	
-	
+	/**
+	 * API header
+	 */
 	static String url_str = "https://api.exchangerate-api.com/v4/latest/";
 	/**
 	 * This is the API we want to use to get currency exchange rate.
