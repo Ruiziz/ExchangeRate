@@ -72,6 +72,8 @@ public class App extends Application {
 		
 		
 		MenuButton menuRaw = new MenuButton("Raw Currency");
+		// set the new menu button
+		MenuButton menuTarget = new MenuButton("Target Currency");
 		for(int i = 0; i < countryList.size(); i++) {
 			MenuItem menuItem = new MenuItem(countryList.get(i));
 			menuRaw.getItems().add(menuItem);
@@ -80,12 +82,21 @@ public class App extends Application {
 				// get the name of raw currency
 				rawName = menuItem.getText();
 				menuRaw.setText(rawName);
-				
+				if(menuTarget.getText()!="Target Currency"&& menuRaw.getText()!="Raw Currency"){
+					Api apiRaw;
+				try {
+					// get the rate (for raw currency)
+					apiRaw = new Api(rawName);
+					rate = apiRaw.getRate(apiRaw.getCurrencyInfo(), targetName);
+				} catch (Exception e) {
+					
+					System.out.println("You should choose a raw currency");;
+				}
+				}
 			});
 			
 		}
-		// set the new menu button
-		MenuButton menuTarget = new MenuButton("Target Currency");
+		
 		// loop
 		for (int j =0; j < countryList.size(); j++) {
 			MenuItem menuTargetItem = new MenuItem(countryList.get(j));
@@ -95,6 +106,7 @@ public class App extends Application {
 				// get the name of target currency
 				targetName = menuTargetItem.getText();
 				// set a new object
+				if(menuTarget.getText()!="Target Currency"&& menuRaw.getText()!="Raw Currency"){
 				Api apiRaw;
 				try {
 					// get the rate (for raw currency)
@@ -104,6 +116,7 @@ public class App extends Application {
 					
 					e.printStackTrace();
 				}
+			}
 				menuTarget.setText(targetName);
 								
 			});
@@ -225,12 +238,19 @@ public class App extends Application {
                 });
         	}else {
         	bt.setOnAction(value ->  {
-        		rawCurrency.appendText(btvalue);
-            	Double num = Double.parseDouble(rawCurrency.getText());
-            	num = num*rate;
-            	String btvalue2 = num.toString();               
-                //System.out.println(btvalue);
-                targetCurrency.setText(btvalue2);
+				rawCurrency.appendText(btvalue);
+				Double num = 0.0;
+				try{
+					num = Double.parseDouble(rawCurrency.getText());
+					num = num*rate;
+            		String btvalue2 = num.toString();              
+                
+                targetCurrency.setText(btvalue2); 
+				}catch(Exception e){
+					targetCurrency.setText("InvalidInputs!");
+				}
+            	
+            	
             });
         	}
         }
