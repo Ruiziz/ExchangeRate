@@ -119,7 +119,8 @@ public class App extends Application {
         Button button = new Button("Upadate Rates");
         // set a TextField where output the number of target currency user wants to get
         TextField targetCurrency = new TextField();
-        targetCurrency.setMinWidth(250);
+		targetCurrency.setMinWidth(250);
+		targetCurrency.setEditable(false);
         // label for targetCurrency
     	Label label2 = new Label("Currency Type");
         
